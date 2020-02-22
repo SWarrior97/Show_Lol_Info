@@ -1,0 +1,20 @@
+.header img {
+    float: left;
+    width: 100%;
+    height: 200px;
+    background: #555;
+  }
+
+
+.icon-profile {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: #555;
+}
+
+.icon-profile h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+  }

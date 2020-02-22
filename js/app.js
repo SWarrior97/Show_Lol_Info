@@ -28,7 +28,7 @@ function getProfile(summonerName){
                 var title = doc.getElementsByTagName('title')[0].innerHTML;
 
                 if(!title.includes('Not Found')){
-                    var User = {summonerName:'',elo:'',lp:'',wins:'',loses:'',winRate:'',icon:'',champ:''};
+                    var User = {summonerName:'',elo:'',lp:'',wins:'',loses:'',winRate:'',icon:'',champ:'',eloIcon:'',lvl:''};
 
                 User.summonerName = title.split('(')[0];
 
@@ -54,6 +54,15 @@ function getProfile(summonerName){
                     if(divs[i].getAttribute('class') == 'pageBanner img-align-block'){
                         User.champ = 'https:'+divs[i].style.backgroundImage.split('url("')[1].split('")')[0];
                     }
+
+                    if(divs[i].getAttribute('class') == 'medium-24 small-24 columns'){
+                        User.eloIcon = 'https:'+ divs[i].childNodes[1].childNodes[1].innerHTML.split('src="')[1].split('"')[0];
+                    }
+
+                    if(divs[i].getAttribute('class') == 'bannerSubtitle'){
+                        var lvl = divs[i].innerHTML.split('-')[0].trim();
+                        User.lvl = lvl.replace(" ", ":");
+                    }
                 }
 
                 for (let i = 0; i < spans.length; i++) {
@@ -76,7 +85,9 @@ function getProfile(summonerName){
                 }
 
                 console.log(User);
-                
+                sessionStorage.setItem('User',User);
+                localStorage.setItem("User", JSON.stringify(User));
+                window.location.href = "file:///H:/projetos/show_lp/summoner.html";
                 }else{
                     console.log("Summoner not found");
                     process.exit();
