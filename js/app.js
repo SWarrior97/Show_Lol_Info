@@ -1,16 +1,11 @@
-
-
 function onClickSubmit() {
     var summonerName = document.getElementById("search").value;
     if(summonerName == ''){
         alert("Insert a valid Summoner Name");
     }else{
         getProfile(summonerName);
-        getChamps();
     }
 }
-
-document.getElementById("submit").addEventListener("click", onClickSubmit);
 
 function getProfile(summonerName){
     var url = 'https://cors-anywhere.herokuapp.com/https://www.leagueofgraphs.com/summoner/euw/'+summonerName;
@@ -66,7 +61,6 @@ function getProfile(summonerName){
                         User.lp = spans[i].innerHTML;
                     }
                 }
-
                 for (let i = 0; i < spans.length; i++) {
                     if (spans[i].getAttribute('class') == 'winsNumber') {
                         User.wins = spans[i].innerHTML;
@@ -94,27 +88,4 @@ function getProfile(summonerName){
             });
 }
 
-
-function getChamps(){
-    fetch('http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json',
-        {
-          method: 'GET'
-        })
-            .then(function(response) {
-                // When the page is loaded convert it to text
-                return response.text()
-            })
-            .then(function(html) {
-                var json = JSON.parse(html);
-                //console.log(json.data);
-                var allChamps = json.data;
-
-                for(var i in allChamps){
-                    //console.log(allChamps[i].key);
-                }
-
-            })
-            .catch(function(err) {  
-                console.log('Failed to fetch page: ', err);  
-            });
-}
+document.getElementById("submit").addEventListener("click", onClickSubmit);
